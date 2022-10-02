@@ -12,6 +12,16 @@ export default function Modal({ image, tags, closeModal }) {
         return () => window.removeEventListener('keydown', onEsc)
     }, [closeModal]);
 
+    useEffect(() => {
+       const onBackdropClick = (e) => {
+           if (e.target.nodeName !== 'IMG') {
+     closeModal();
+    }
+  };
+        window.addEventListener('click', onBackdropClick);
+        return () => window.removeEventListener('click', onBackdropClick)
+    }, [closeModal]);
+
      return (
             <div className={styles.Overlay}>
                 <div className={styles.Modal}>
